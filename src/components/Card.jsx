@@ -1,4 +1,5 @@
 import "../styles/Card.css";
+import { Link } from "react-router";
 
 const Card = ({ card }) => {
   let textColor = "black";
@@ -15,7 +16,13 @@ const Card = ({ card }) => {
         <p>Archetype: {card.archetype}</p>
       </div>
       <p>Level: {card.level}</p>
-      <img src={card.image} alt="Card image" width={200} height={250} style={{objectFit: "cover"}}/>
+      <img
+        src={card.image}
+        alt="Card image"
+        width={200}
+        height={250}
+        style={{ objectFit: "cover" }}
+      />
       <div>
         <small>Ability: {card.ability}</small>
         <br />
@@ -24,6 +31,9 @@ const Card = ({ card }) => {
           <small>DEF: {card.def}</small>
         </div>
       </div>
+      <Link to={`/edit/${card.id}`}>
+        <button>Edit</button>
+      </Link>
     </article>
   );
 };
