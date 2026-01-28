@@ -10,10 +10,10 @@ const atkDefRange = [1, 1000];
 
 const CreateCardForm = () => {
   const [card, setCard] = useState({
-    color: "#000000",
+    color: "black",
     name: "",
     image: "",
-    archetype: "",
+    archetype: "fire",
     level: 0,
     atk: 0,
     def: 0,
@@ -48,14 +48,18 @@ const CreateCardForm = () => {
     <div>
       <h2>Create a Card</h2>
       <form onSubmit={handleSubmit} className="create-form">
-        <input
-          type="color"
+        <label htmlFor="color">Color</label>
+        <select
           name="color"
           id="color"
+          required
           value={card.color}
           onChange={handleFormChange}
-          required
-        />
+        >
+          <option value="black">Black</option>
+          <option value="white">White</option>
+          <option value="green">Green</option>
+        </select>
         {/* Card name */}
         <LabeledInput
           name="name"
