@@ -34,6 +34,9 @@ const Card = ({ card }) => {
       <Link to={`/edit/${card.id}`}>
         <button>Edit</button>
       </Link>
+      <Link to={`/card/${card.id}`}>
+        <button>Details</button>
+      </Link>
     </article>
   );
 };
