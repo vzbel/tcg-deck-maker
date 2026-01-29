@@ -59,6 +59,24 @@ const EditCardForm = () => {
     setCard({ ...card, [e.target.name]: Number(e.target.value) });
   };
 
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete the card?")) {
+      setDisabled(true);
+      const { error } = await supabase
+        .from("CARD")
+        .delete()
+        .eq("id", card.id)
+        .select();
+      setDisabled(false);
+      if (error) {
+        alert("Card deletion failed");
+      } else {
+        alert("Card successfully deleted");
+      }
+      navigate("/");
+    }
+  };
+
   return (
     card && (
       <>
@@ -163,6 +181,9 @@ const EditCardForm = () => {
 
           {/* Card ability */}
           <button disabled={disabled}>Submit Edits</button>
+          <button type="button" onClick={handleDelete} disabled={disabled}>
+            Delete Card
+          </button>
         </form>
       </>
     )
