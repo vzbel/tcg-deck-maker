@@ -24,15 +24,19 @@ const CreateCardForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setDisabled(true);
-    const { error } = await supabase.from("CARD").insert(card);
-    if (error) {
-      alert(error);
+    if (card.archetype === "fire" && card.atk > 900) {
+      alert("Too OP, lower attack");
     } else {
-      setDisabled(false);
-      alert("Successfully added card!");
-      // navigate to home page
-      navigate("/");
+      setDisabled(true);
+      const { error } = await supabase.from("CARD").insert(card);
+      if (error) {
+        alert(error);
+      } else {
+        setDisabled(false);
+        alert("Successfully added card!");
+        // navigate to home page
+        navigate("/");
+      }
     }
   };
 

@@ -37,17 +37,21 @@ const EditCardForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setDisabled(true);
-    const { error } = await supabase
-      .from("CARD")
-      .update(card)
-      .eq("id", card.id);
-    setDisabled(false);
-    if (error) {
-      alert("Error updating card");
+    if (card.archetype === "fire" && card.atk > 900) {
+      alert("Too OP, lower attack");
     } else {
-      alert("Card successfully updated!");
-      navigate("/");
+      setDisabled(true);
+      const { error } = await supabase
+        .from("CARD")
+        .update(card)
+        .eq("id", card.id);
+      setDisabled(false);
+      if (error) {
+        alert("Error updating card");
+      } else {
+        alert("Card successfully updated!");
+        navigate("/");
+      }
     }
   };
 
